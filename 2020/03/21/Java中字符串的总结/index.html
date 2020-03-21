@@ -6,15 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://1648121487.github.io">
-  <title>Archives | Cohen Cao的个人博客</title>
+  <title>Java中字符串的总结 | Cohen Cao的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Cohen Cao的个人博客">
-<meta property="og:url" content="https://1648121487.github.io/archives/index.html">
+  <meta name="description" content="一、String类概述 　　1、概述 　　　　java.lang.String 类代表字符串。Java程序中所有的字符串文字（例如 &quot;abc&quot; ）都可以被看作是实现此类的实例。String 是引用数据类型，不是基本数据类型。 　　　　类 String 中包括用于检查各个字符串的方法，比如用于比较字符串，搜索字符串，提取子字符串以及创建具有翻译为大写或小写的所有字符的字符串的副本。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java中字符串的总结">
+<meta property="og:url" content="https://1648121487.github.io/2020/03/21/Java%E4%B8%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="Cohen Cao的个人博客">
+<meta property="og:description" content="一、String类概述 　　1、概述 　　　　java.lang.String 类代表字符串。Java程序中所有的字符串文字（例如 &quot;abc&quot; ）都可以被看作是实现此类的实例。String 是引用数据类型，不是基本数据类型。 　　　　类 String 中包括用于检查各个字符串的方法，比如用于比较字符串，搜索字符串，提取子字符串以及创建具有翻译为大写或小写的所有字符的字符串的副本。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img2018.cnblogs.com/i-beta/1691302/201912/1691302-20191216112146655-1488793712.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/i-beta/1691302/201912/1691302-20191216110009092-186090513.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1691302/201908/1691302-20190805153209346-1239440098.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/i-beta/1691302/201912/1691302-20191216110438906-1959381743.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/i-beta/1691302/201912/1691302-20191216110505582-2062138785.png">
+<meta property="article:published_time" content="2020-03-21T08:38:15.729Z">
+<meta property="article:modified_time" content="2020-03-21T08:37:09.451Z">
 <meta property="article:author" content="Cohen Cao">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img2018.cnblogs.com/i-beta/1691302/201912/1691302-20191216112146655-1488793712.png">
   
     <link rel="alternative" href="/atom.xml" title="Cohen Cao的个人博客" type="application/atom+xml">
   
@@ -158,103 +168,286 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-Java中字符串的总结" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Java中字符串的总结
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/21/Java%E4%B8%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%80%BB%E7%BB%93/" class="archive-article-date">
+
+        
+        <a href="/2020/03/21/Java%E4%B8%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%80%BB%E7%BB%93/" class="archive-article-date">
   	<time datetime="2020-03-21T08:38:15.729Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-21</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/21/Java%E4%B8%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%80%BB%E7%BB%93/">Java中字符串的总结</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div id="cnblogs_post_body" class="blogpost-body ">
+    <h1>一、String类概述</h1>
+<h2>　　1、概述</h2>
+<p><span style="font-size: 18px;">　　　　<span class="fontstyle0"><strong>java.lang.String </strong><span class="fontstyle2"><strong>类</strong>代表字符串。<span class="fontstyle3">Java<span class="fontstyle2">程序中所有的字符串文字（例如 <span class="fontstyle0">"abc" <span class="fontstyle2">）都可以被看作是实现此类的实例。<span style="color: #ff0000;"><strong>String 是引用数据类型，不是基本数据类型。</strong></span></span></span></span></span></span></span></span></p>
+<p><span style="font-size: 18px;"><span class="fontstyle0"><span class="fontstyle2"><span class="fontstyle3"><span class="fontstyle2"><span class="fontstyle0"><span class="fontstyle2">　　　　<span class="fontstyle0"><strong>类 </strong><span class="fontstyle2"><strong>String</strong> <span class="fontstyle0">中包括用于检查各个字符串的方法，比如用于<span class="fontstyle0">比较<span class="fontstyle0">字符串，<span class="fontstyle0">搜索<span class="fontstyle0">字符串，<span class="fontstyle0">提取<span class="fontstyle0">子字符串以及创建具有翻译为<span class="fontstyle0">大写<span class="fontstyle0">或<span class="fontstyle0">小写<span class="fontstyle0">的所有字符的字符串的副本。 </span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></p>
+<h2>　　2、特点<span style="color: #ff0000;"><strong>【重要】</strong></span></h2>
+<p>　　　<strong>　<span style="font-size: 18px;">a、<span class="fontstyle0">字符串不变：字符串的值在创建后不能被更改。<span style="color: #ff0000;">【非常重要】&nbsp;</span><br></span></span></strong></p>
+<p><strong><span style="font-size: 18px;"><span class="fontstyle0">　　　　</span></span></strong><span style="font-size: 18px;"><span class="fontstyle0">Demo：</span></span></p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_369345" class="syntaxhighlighter  javascript"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="javascript plain">String s1 = </code><code class="javascript string">"abc"</code><code class="javascript plain">;</code></div><div class="line number2 index1 alt1"><code class="javascript plain">s1 += </code><code class="javascript string">"def"</code><code class="javascript plain">;</code></div><div class="line number3 index2 alt2"><code class="javascript plain">System.out.println(s1);&nbsp; </code><code class="javascript comments">// s1 = "abcdef"</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>　　　　　<span style="font-family: 隶书;">　</span><span style="font-size: 18px;"><span style="font-family: 楷体;"><strong>分析</strong>：</span><span class="fontstyle0"><span style="font-family: 楷体;">内存中有</span><span class="fontstyle1"><span style="font-family: 楷体;">"abc"</span><span class="fontstyle0"><span style="font-family: 楷体;">，</span><span class="fontstyle1"><span style="font-family: 楷体;">"abcdef"</span><span class="fontstyle0"><span style="font-family: 楷体;">两个对象，</span><span class="fontstyle1"><span style="font-family: 楷体;">s1</span><span class="fontstyle0"><span style="font-family: 楷体;">从指向&nbsp;</span><span class="fontstyle1"><span style="font-family: 楷体;">"abc"</span><span class="fontstyle0"><span style="font-family: 楷体;">，改变指向，指向了</span><span class="fontstyle1"><span style="font-family: 楷体;">"abcdef" ，字符串本身并没有改变，而是改变了指向。</span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p><span style="font-size: 18px;"><span class="fontstyle0"><span class="fontstyle1"><span class="fontstyle0"><span class="fontstyle1"><span class="fontstyle0"><span class="fontstyle1"><span class="fontstyle0"><span class="fontstyle1"><span class="fontstyle0"><span class="fontstyle1"><span style="font-family: 楷体;">　　　　<strong><span style="color: #3366ff;"> 扩展</span>：String对象怎么就不可变？</strong><br></span></span></span></span></span></span></span></span></span></span></span></span></p>
+<blockquote>
+<p><span style="font-size: 18px;"><span class="fontstyle0"><span class="fontstyle1"><span class="fontstyle0"><span class="fontstyle1"><span class="fontstyle0"><span class="fontstyle1"><span class="fontstyle0"><span class="fontstyle1"><span class="fontstyle0"><span class="fontstyle1"><span style="font-family: 楷体;"><strong>底层char[]数组有final修饰，意味着这个数组不能扩容等，来达到存更多的字符</strong></span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p><span style="font-size: 18px;"><span class="fontstyle0"><span class="fontstyle1"><span class="fontstyle0"><span class="fontstyle1"><span class="fontstyle0"><span class="fontstyle1"><span class="fontstyle0"><span class="fontstyle1"><span class="fontstyle0"><span class="fontstyle1"><span style="font-family: 楷体;"><strong>char[]数组是私有的，程序员无法直接操作这个char[]数组，而且String没有提供这样的方法，来修改char[]数组的元素的值。</strong></span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p><span style="font-size: 18px;"><span class="fontstyle0"><span class="fontstyle1"><span class="fontstyle0"><span class="fontstyle1"><span class="fontstyle0"><span class="fontstyle1"><span class="fontstyle0"><span class="fontstyle1"><span class="fontstyle0"><span class="fontstyle1"><span style="font-family: 楷体;"><strong>String提供的所有的方法，对字符串的修改都是给你返回一个新的字符串对象。　　　　<br></strong></span></span></span></span></span></span></span></span></span></span></span></span></p>
 
-        <div class="article-info info-on-right">
-          
-          
 
+
+
+
+
+
+
+
+
+
+</blockquote>
+<p><strong><span style="font-size: 18px;">　　　b、<span class="fontstyle0">因为<span class="fontstyle1">String<span class="fontstyle0">对象是不可变的，可以把一些字符串存到常量池中，字符串在常量池中，可以被共享。</span></span></span></span></strong></p>
+<p><strong><span style="font-size: 18px;"><span class="fontstyle0"><span class="fontstyle1"><span class="fontstyle0">　　　　</span></span></span></span></strong><span style="font-size: 18px;"><span class="fontstyle0"><span class="fontstyle1"><span class="fontstyle0">Demo：</span></span></span></span></p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_629295" class="syntaxhighlighter  java"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="java plain">String str1 = </code><code class="java string">"abc"</code><code class="java plain">;</code></div><div class="line number2 index1 alt1"><code class="java plain">String str2 = </code><code class="java string">"abc"</code><code class="java plain">;</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>　　　　　　<span style="font-size: 18px; font-family: 楷体;"><strong>分析</strong>：内存中只有一个 "abc" 对象被创建，同时被 s1 和 s2 共享。</span></p>
+<p><strong><span style="font-size: 18px;">　　　c、字符串对象底层的存储：</span></strong></p>
+<p><strong><span style="font-size: 18px;">　　　　　　JDK1.9之前：底层是用 char[ ] 存储</span></strong></p>
+<p><strong><span style="font-size: 18px;">　　　　　　JDK1.9之后：底层选用 byte[ ] 存储&nbsp;</span></strong></p>
+<p><strong><span style="font-size: 18px;">　　　　</span></strong><span style="font-size: 18px;">Demo：</span></p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_8091" class="syntaxhighlighter  java"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="java plain">String str = </code><code class="java string">"abc"</code><code class="java plain">;</code></div><div class="line number2 index1 alt1"><code class="java plain">相当于 </code></div><div class="line number3 index2 alt2"><code class="java keyword">char</code> <code class="java plain">datas[] = {</code><code class="java string">'a'</code><code class="java plain">, </code><code class="java string">'b'</code><code class="java plain">, </code><code class="java string">'c'</code><code class="java plain">};</code></div><div class="line number4 index3 alt1"><code class="java plain">String str = </code><code class="java keyword">new</code> <code class="java plain">String(datas);</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>　　<span style="font-size: 18px;"><strong>　　d、String 类型不能被继承，因为 String 是由<span style="color: #ff0000;"> final</span> 修饰的。</strong></span></p>
+<h1>二、String类使用步骤</h1>
+<h2>　　1、导包</h2>
+<p><span style="font-size: 18px;">　　　　String 这个类 是 java.lang.String 包内的，不需要手动导入。</span></p>
+<p><span style="font-size: 18px;">　　　　<span style="color: #0000ff;"><strong>扩展</strong></span>：常用的如 基本数据类型，String，还有一些工具类，只要是 <strong>lang 包</strong>下面的，就不必写<strong> import</strong> 导包语句。</span></p>
+<h2>　　2、创建字符串</h2>
+<p><span style="font-size: 18px;">　　　　创建字符串的常见3+1种方式。（三种构造方法，一种直接创建）</span></p>
+<p>　　　<strong><span style="font-size: 18px;">　　a、构造方法创建</span></strong>&nbsp;</p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_411250" class="syntaxhighlighter  java"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="java keyword">public</code> <code class="java plain">String() ：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 初始化新创建的 String对象，以使其表示空字符序列</code></div><div class="line number2 index1 alt1"><code class="java keyword">public</code> <code class="java plain">String(</code><code class="java keyword">char</code><code class="java plain">[] value) ：通过当前参数中的字符数组来构造新的String。</code></div><div class="line number3 index2 alt2"><code class="java keyword">public</code> <code class="java plain">String(</code><code class="java keyword">byte</code><code class="java plain">[] bytes) ：通过使用平台的默认字符集解码当前参数中的字节数组来构造新的String。</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>　　　　　　<span style="font-size: 18px;">Demo：</span></p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_444084" class="syntaxhighlighter  java"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="java comments">// 无参构造</code></div><div class="line number2 index1 alt1"><code class="java plain">String str = </code><code class="java keyword">new</code> <code class="java plain">String（）；</code></div><div class="line number3 index2 alt2"><code class="java comments">// 通过字符数组构造</code></div><div class="line number4 index3 alt1"><code class="java keyword">char</code> <code class="java plain">chars[] = {</code><code class="java string">'a'</code><code class="java plain">, </code><code class="java string">'b'</code><code class="java plain">, </code><code class="java string">'c'</code><code class="java plain">};</code></div><div class="line number5 index4 alt2"><code class="java plain">String str2 = </code><code class="java keyword">new</code> <code class="java plain">String(chars);</code></div><div class="line number6 index5 alt1"><code class="java comments">// 通过字节数组构造</code></div><div class="line number7 index6 alt2"><code class="java keyword">byte</code> <code class="java plain">bytes[] = { </code><code class="java value">97</code><code class="java plain">, </code><code class="java value">98</code><code class="java plain">, </code><code class="java value">99</code> <code class="java plain">};</code></div><div class="line number8 index7 alt1"><code class="java plain">String str3 = </code><code class="java keyword">new</code> <code class="java plain">String(bytes);</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p><strong><span style="font-size: 18px;">　　 &nbsp; &nbsp; &nbsp; &nbsp;b、直接创建</span></strong></p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_980812" class="syntaxhighlighter  java"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="java plain">String str = </code><code class="java string">"字符串内容"</code><code class="java plain">; </code><code class="java comments">// 右边直接用双引号</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p>　　　　　<span style="font-size: 18px; font-family: 楷体;"><strong>分析</strong>：这里面虽然没有 <strong>new</strong> 关键字，但同时创建了一个 String 对象。</span></p>
+<h1>三、String 对象的创建</h1>
+<blockquote>
+<p><span style="font-size: 18px;">String str = “hello”;</span></p>
+<p><span style="font-size: 18px;">String&nbsp; s1 = new String();&nbsp;&nbsp; //&nbsp; 本质上&nbsp; this.value = new char[0];</span></p>
+<p><span style="font-size: 18px;">String&nbsp; s2 = new String(String original);&nbsp; //this.value = original.value;</span></p>
+<p><span style="font-size: 18px;">String&nbsp; s3 = new String(char[] a);&nbsp; //this.value = Arrays.copyOf(value, value.length);</span></p>
+<p><span style="font-size: 18px;">String&nbsp; s4 = new String(char[] a,int startIndex,int count)</span></p>
+<p><span style="font-size: 18px;">.......</span></p>
+</blockquote>
+<p>　　<span style="font-size: 18px;">图解：</span></p>
+<p><span style="font-size: 18px;">　　<img src="https://img2018.cnblogs.com/i-beta/1691302/201912/1691302-20191216112146655-1488793712.png" alt=""></span></p>
+<p>&nbsp;</p>
+<p>&nbsp;　　<strong><span style="font-size: 18px;">面试题：</span></strong></p>
+<blockquote>
+<p><span style="font-size: 18px;">（1）String str = new String("hello"); 涉及几个对象？—— 两个</span></p>
+<p><span style="font-size: 18px;">（2）String str1 = new String("hello");</span></p>
+<p><span style="font-size: 18px;">　　&nbsp;&nbsp;String str2 = new String("hello");涉及几个对象？—— 三个　　</span></p>
+</blockquote>
+<h1>四、字符串是如何存储的</h1>
+<p>　　<span style="font-size: 18px;">字符串常量存储在字符串常量池，目的是共享。</span></p>
+<p><span style="font-size: 18px;">　&nbsp; 字符串非常量对象存储在堆中。</span></p>
+<p><span style="font-size: 18px;">　　<img src="https://img2018.cnblogs.com/i-beta/1691302/201912/1691302-20191216110009092-186090513.png" alt=""></span></p>
+<p>　　　<img src="https://img2018.cnblogs.com/blog/1691302/201908/1691302-20190805153209346-1239440098.png" alt=""></p>
+<p>　　<span style="font-size: 18px;">字符串常量池：</span></p>
+<p>　　<span style="font-size: 18px;">1、当直接创建一个字符串时，变量会到字符串常量池中去寻找该字符串，如果找到了，该变量指向该字符串；如果没有找到，会用 byte[ ]拼接成所需的字符串，然后放入常量池中并指向它。</span></p>
+<p><span style="font-size: 18px;">　 &nbsp;2、使用 new 关键字创建字符串，会在堆区创建一个 String 对象，而且底层是用 byte[ ] 数组拼接的，这个 String 对象并没有放入字符串常量池中，而是在堆中，该变量指向该对象的地址。</span></p>
+<p>　　<span style="font-size: 18px;"><strong><span style="color: #3366ff;">扩展</span>：</strong><strong>&nbsp;字符串常量池在哪里？（Oracle官方虚拟机HotSpot）</strong></span></p>
+<blockquote>
+<p><span style="font-size: 18px;"><strong>（1）JDK1.6以及之前：方法区中</strong></span></p>
+<p><span style="font-size: 18px;"><strong>（2）JDK1.7：挪到堆中，即在堆中单独划分了一块字符串常量</strong></span></p>
+<p><span style="font-size: 18px;"><strong>（3）JDK1.8：从堆中挪出，挪到一个 “元空间meta space”，即类似于方法区</strong></span></p>
+</blockquote>
+<p>&nbsp;</p>
+<h1>&nbsp;五、字符串的拼接</h1>
+<h2>&nbsp; &nbsp; &nbsp;<img src="https://img2018.cnblogs.com/i-beta/1691302/201912/1691302-20191216110438906-1959381743.png" alt=""></h2>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;<img src="https://img2018.cnblogs.com/i-beta/1691302/201912/1691302-20191216110505582-2062138785.png" alt=""></p>
+<p>&nbsp;</p>
+<p>&nbsp;<span style="font-size: 18px;"><strong>结论</strong>：</span></p>
+<p><span style="font-size: 18px;">　　（1）因为只有常量池中才是共享，==比较才为 true；</span></p>
+<p><span style="font-size: 18px;">　　（2）常量与常量的拼接结果在常量池中；</span></p>
+<p><span style="font-size: 18px;">　　（3）只要其中有一个是变量，结果就在堆中；</span></p>
+<p><span style="font-size: 18px;">　　（4）如果拼接的结果调用 intern() 方法，就在常量池中；</span></p>
+<p>&nbsp;</p>
+<h1>六、空字符串</h1>
+<h2>　　1、表现方式</h2>
+<blockquote>
+<p><span style="font-size: 18px;">（1）String str = "";</span></p>
+<p><span style="font-size: 18px;">（2）String str2 = new String();</span></p>
+<p><span style="font-size: 18px;">（3）String str3 = new String("");</span></p>
+</blockquote>
+<h2>　　2、判断是否为空</h2>
+<blockquote>
+<p><span style="font-size: 18px;">（1）if(str != null &amp;&amp; str.length() == 0)</span></p>
+<p><span style="font-size: 18px;">（2）if(str != null &amp;&amp; str.equals(""))</span></p>
+<p><span style="font-size: 18px;">（3）if("".equals(str))&nbsp; 推荐</span></p>
+<p><span style="font-size: 18px;">（4）if(str!=null &amp;&amp; str.isEmpty())</span></p>
+</blockquote>
+</div>
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/zhifubao.JPG">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixin.JPG">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://1648121487.github.io/2020/03/21/Java%E4%B8%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%80%BB%E7%BB%93/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/04/Hexo+Github%20Pages+yilia%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2020-03-04T05:34:14.007Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-04</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/03/04/Hexo+Github%20Pages+yilia%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hexo+Github Pages+yilia搭建博客</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/04/Hexo+Github%20Pages+yilia%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">Hexo+Github Pages+yilia搭建博客</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/04/%E5%85%B3%E4%BA%8EJava%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8API/" class="archive-article-date">
-  	<time datetime="2020-03-04T05:02:50.917Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/04/%E5%85%B3%E4%BA%8EJava%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8API/">关于Java数据结构的一些常用API</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -277,8 +470,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
