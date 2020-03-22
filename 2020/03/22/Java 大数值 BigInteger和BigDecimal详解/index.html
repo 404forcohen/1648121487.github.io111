@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://1648121487.github.io">
-  <title>Archives: 2020 | Cohen Cao的个人博客</title>
+  <title>Java 大数值 BigInteger和BigDecimal详解 | Cohen Cao的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Cohen Cao的个人博客">
-<meta property="og:url" content="https://1648121487.github.io/archives/2020/index.html">
+  <meta name="description" content="&amp;nbsp;  最近的项目中用到了BigDecimal，之前并没有深入学习使用过，只是大概知道可以用于精确的运算，而float和double是不精确的。  BigDecimal的实现中用到了B">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 大数值 BigInteger和BigDecimal详解">
+<meta property="og:url" content="https://1648121487.github.io/2020/03/22/Java%20%E5%A4%A7%E6%95%B0%E5%80%BC%20BigInteger%E5%92%8CBigDecimal%E8%AF%A6%E8%A7%A3/index.html">
 <meta property="og:site_name" content="Cohen Cao的个人博客">
+<meta property="og:description" content="&amp;nbsp;  最近的项目中用到了BigDecimal，之前并没有深入学习使用过，只是大概知道可以用于精确的运算，而float和double是不精确的。  BigDecimal的实现中用到了B">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-22T08:59:07.621Z">
+<meta property="article:modified_time" content="2020-03-22T09:00:56.029Z">
 <meta property="article:author" content="Cohen Cao">
 <meta name="twitter:card" content="summary">
   
@@ -158,130 +162,289 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-Java 大数值 BigInteger和BigDecimal详解" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Java 大数值 BigInteger和BigDecimal详解
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/22/Java%20%E5%A4%A7%E6%95%B0%E5%80%BC%20BigInteger%E5%92%8CBigDecimal%E8%AF%A6%E8%A7%A3/" class="archive-article-date">
+
+        
+        <a href="/2020/03/22/Java%20%E5%A4%A7%E6%95%B0%E5%80%BC%20BigInteger%E5%92%8CBigDecimal%E8%AF%A6%E8%A7%A3/" class="archive-article-date">
   	<time datetime="2020-03-22T08:59:07.621Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-22</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/22/Java%20%E5%A4%A7%E6%95%B0%E5%80%BC%20BigInteger%E5%92%8CBigDecimal%E8%AF%A6%E8%A7%A3/">Java 大数值 BigInteger和BigDecimal详解</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div id="article_content" class="article_content clearfix">
+            <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/ck_htmledit_views-833878f763.css">
+                            <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/ck_htmledit_views-833878f763.css">
+                <div class="htmledit_views" id="content_views">
+                                            <p>&nbsp;</p>
 
-        <div class="article-info info-on-right">
-          
-          
+<p>最近的项目中用到了BigDecimal，之前并没有深入学习使用过，只是大概知道可以用于精确的运算，而float和double是不精确的。</p>
 
+<p>BigDecimal的实现中用到了BigIntegr，因此这里先学习下BigInteger。</p>
+
+<h1><a name="t0"></a><a name="t0"></a>BigInteger</h1>
+
+<p>int和long都有长度限制，如果需要计算的整数大小超过long的范围，那么可以用到BigInteger。</p>
+
+<p>BigInteger继承自抽象类Number。</p>
+
+<pre class="has" name="code"><code class="language-java hljs"><ol class="hljs-ln" style="width:1068px"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 符号，-1-负数，0-0，1-正数</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> signum;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="3"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">//以大尾数顺序表示的这个大整数的大小：这个数组的第0个元素是该大小中最重要的整数。</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="4"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">//大小必须“最小”，因为最重要的int（@code mag[0]）必须为非零。</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="5"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">//这对于确保每个biginteger值只有一个表示是必要的。注意，这意味着biginteger zero有一个零长度的mag数组。</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="6"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// mag表示的是正数的原码字节数组。mag数组是存储BigInteger数值大小的，采用big-endian的顺序，也就是高位字节存入低地址，低位字节存入高地址.</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="7"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// http://www.mamicode.com/info-detail-1360414.html</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="8"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span>[] mag;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="9"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 冗余字段</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="10"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> bitCount;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="11"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 冗余字段</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="12"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> bitLength;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="13"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 冗余字段</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="14"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> lowestSetBit;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="15"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 冗余字段</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="16"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> firstNonzeroIntNum;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="17"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 用于获取int值</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="18"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">final</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">long</span> LONG_MASK = <span class="hljs-number">0xffffffffL</span>;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="19"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 数组最大长度</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="20"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MAX_MAG_LENGTH = Integer.MAX_VALUE / Integer.SIZE + <span class="hljs-number">1</span>; <span class="hljs-comment">// (1 &lt;&lt; 26)</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="21"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// PRIME_SEARCH_BIT_LENGTH_LIMIT 大于这个长度的大数会导致BitSieve.singleSearch方法溢出</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="22"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span>  <span class="hljs-keyword">int</span> PRIME_SEARCH_BIT_LENGTH_LIMIT = <span class="hljs-number">500000000</span>;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="23"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 两个大数的mag[] 长度都大于这个值，将会使用Karatsuba multiplication</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="24"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> KARATSUBA_THRESHOLD = <span class="hljs-number">80</span>;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="25"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 如果两个数mag长度都大于KARATSUBA_THRESHOLD，且至少一个的长度大于这个限度，将会使用3-way Toom-Cook multiplication</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="26"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> TOOM_COOK_THRESHOLD = <span class="hljs-number">240</span>;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="27"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 如果大数的数组长度大于该限制，将会使用Karatsuba squaring</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="28"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> KARATSUBA_SQUARE_THRESHOLD = <span class="hljs-number">128</span>;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="29"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 如果大数的数组长度大于该限制，将会使用Toom-Cook squaring</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="30"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> TOOM_COOK_SQUARE_THRESHOLD = <span class="hljs-number">216</span>;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="31"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 下面几个参数作用类似，暂时不记录，等到以后需要时再细看</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="32"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> BURNIKEL_ZIEGLER_THRESHOLD = <span class="hljs-number">80</span>;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="33"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> BURNIKEL_ZIEGLER_OFFSET = <span class="hljs-number">40</span>;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="34"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> SCHOENHAGE_BASE_CONVERSION_THRESHOLD = <span class="hljs-number">20</span>;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="35"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MULTIPLY_SQUARE_THRESHOLD = <span class="hljs-number">20</span>;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="36"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MONTGOMERY_INTRINSIC_THRESHOLD = <span class="hljs-number">512</span>;</div></div></li></ol></code><div class="hljs-button {2}" data-title="复制" onclick="hljs.copyCode(event)"></div></pre>
+
+<p>构造函数</p>
+<a id="more"></a>
+<pre class="has" name="code"><code class="language-java hljs"><ol class="hljs-ln" style="width:1316px"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 该部分注释来自于 http://www.mamicode.com/info-detail-1360414.html</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">BigInteger</span><span class="hljs-params">(<span class="hljs-keyword">byte</span>[] val)</span> </span>{</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="3"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">        <span class="hljs-keyword">if</span> (val.length == <span class="hljs-number">0</span>)</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="4"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NumberFormatException(<span class="hljs-string">"Zero length BigInteger"</span>);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="5"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"> </div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="6"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">        <span class="hljs-comment">// 如果第一个字节是负数，则这个byte[] val就是负数的补码。因此通过补码的逆运算（补码的补码）可以得到负数的绝对值，再将符号位设置为-，则得到这个补码所代表的负数。</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="7"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">        <span class="hljs-comment">// 如果参数字节数组以-1开头，不管几个，只要-1是连续的，那么这些-1都看成是符号-，这些-1的下一个字节才是有效字节。如果不以-1开头而是其他负数，则有效字节从索引0开始。</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="8"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">        <span class="hljs-keyword">if</span> (val[<span class="hljs-number">0</span>] &lt; <span class="hljs-number">0</span>) {</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="9"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">            mag = makePositive(val);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="10"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">            signum = -<span class="hljs-number">1</span>;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="11"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">        } <span class="hljs-keyword">else</span> {</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="12"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">            <span class="hljs-comment">// 如果第一个字节是整数，则采用stripLeadingZeroBytes方法，将每个字节的二进制补码按顺序连接起来后去掉开头的0后返回。</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="13"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">            mag = stripLeadingZeroBytes(val);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="14"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">            signum = (mag.length == <span class="hljs-number">0</span> ? <span class="hljs-number">0</span> : <span class="hljs-number">1</span>);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="15"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">        }</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="16"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">        <span class="hljs-keyword">if</span> (mag.length &gt;= MAX_MAG_LENGTH) {</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="17"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">            checkRange();</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="18"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">        }</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="19"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">    }</div></div></li></ol></code><div class="hljs-button {2}" data-title="复制" onclick="hljs.copyCode(event)"></div></pre>
+
+<pre class="has" name="code"><code class="language-java hljs"><ol class="hljs-ln"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 将一个包含大数的二进制补码的的int数组转换为biginteger</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">BigInteger</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] val)</span> </span>{</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="3"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">        <span class="hljs-keyword">if</span> (val.length == <span class="hljs-number">0</span>)</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="4"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NumberFormatException(<span class="hljs-string">"Zero length BigInteger"</span>);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="5"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"> </div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="6"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">        <span class="hljs-keyword">if</span> (val[<span class="hljs-number">0</span>] &lt; <span class="hljs-number">0</span>) {</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="7"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">            mag = makePositive(val);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="8"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">            signum = -<span class="hljs-number">1</span>;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="9"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">        } <span class="hljs-keyword">else</span> {</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="10"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">            mag = trustedStripLeadingZeroInts(val);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="11"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">            signum = (mag.length == <span class="hljs-number">0</span> ? <span class="hljs-number">0</span> : <span class="hljs-number">1</span>);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="12"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">        }</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="13"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">        <span class="hljs-keyword">if</span> (mag.length &gt;= MAX_MAG_LENGTH) {</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="14"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">            checkRange();</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="15"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">        }</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="16"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">    }</div></div></li></ol></code><div class="hljs-button {2}" data-title="复制" onclick="hljs.copyCode(event)"></div></pre>
+
+<pre class="has" name="code"><code class="language-java hljs"><ol class="hljs-ln"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 在上边两个构造函数中加上了signum来判断符号的正负</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">BigInteger</span><span class="hljs-params">(<span class="hljs-keyword">int</span> signum, <span class="hljs-keyword">byte</span>[] magnitude)</span></span>;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="3"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"> </div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="4"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">BigInteger</span><span class="hljs-params">(<span class="hljs-keyword">int</span> signum, <span class="hljs-keyword">int</span>[] magnitude)</span></span></div></div></li></ol></code><div class="hljs-button {2}" data-title="复制" onclick="hljs.copyCode(event)"></div></pre>
+
+<pre class="has" name="code"><code class="language-java hljs"><ol class="hljs-ln"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 把val按照radix进制转化为大数，val中可以包含一个可选的-或+，不可以有空格</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">BigInteger</span><span class="hljs-params">(String val, <span class="hljs-keyword">int</span> radix)</span></span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="3"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 10进制的BigInteger(String val, int radix)方法</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="4"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">public</span> <span class="hljs-title">BigInteger</span><span class="hljs-params">(String val)</span></div></div></li></ol></code><div class="hljs-button {2}" data-title="复制" onclick="hljs.copyCode(event)"></div></pre>
+
+<p>其他的暂时看不下去了，等待需要用到的时候看吧，令人头秃。</p>
+
+<p>先看几个常用的方法：</p>
+
+<pre class="has" name="code"><code class="language-java hljs"><ol class="hljs-ln" style="width:972px"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 返回一个大整数，其值等于指定的@code long。此“静态工厂方法”优先于（@code long）构造函数提供，因为它允许重用常用的大整数。</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 如果值在-16-16之间，那么返回的BigInteger是同一个对象。</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="3"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> BigInteger <span class="hljs-title">valueOf</span><span class="hljs-params">(<span class="hljs-keyword">long</span> val)</span></span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="4"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"> </div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="5"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 原因，以下代码在静态代码块中，返回时就是返回这两个数组对应位置的对象</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="6"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-title">for</span> <span class="hljs-params">(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= MAX_CONSTANT; i++)</span> {</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="7"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">    <span class="hljs-keyword">int</span>[] magnitude = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">1</span>];</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="8"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">    magnitude[<span class="hljs-number">0</span>] = i;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="9"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">    posConst[i] = <span class="hljs-keyword">new</span> BigInteger(magnitude,  <span class="hljs-number">1</span>);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="10"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">    negConst[i] = <span class="hljs-keyword">new</span> BigInteger(magnitude, -<span class="hljs-number">1</span>);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="11"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">}</div></div></li></ol></code><div class="hljs-button {2}" data-title="复制" onclick="hljs.copyCode(event)"></div></pre>
+
+<p>使用BigInteger做加减乘除运算时，分别需要调用实例方法：</p>
+
+<pre class="has" name="code"><code class="language-java hljs"><ol class="hljs-ln"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigInteger test1 = BigInteger.valueOf(<span class="hljs-number">7</span>);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigInteger test2 = BigInteger.valueOf(<span class="hljs-number">8</span>);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="3"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigInteger testNeg = BigInteger.valueOf(-<span class="hljs-number">1</span>);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="4"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigInteger r1 = test1.add(test2);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="5"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigInteger r2 = test1.subtract(test2);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="6"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigInteger r3 = test1.multiply(test2);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="7"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigInteger r4 = test1.divide(test2);</div></div></li></ol></code><div class="hljs-button {2}" data-title="复制" onclick="hljs.copyCode(event)"></div></pre>
+
+<p>和long相比，BigInteger不会有长度限制，但是计算效率较低。</p>
+
+<p>BigInteger也是不可变类，可以转换为基本类型，转换时会丢失高位信息。</p>
+
+<h1><a name="t1"></a><a name="t1"></a>BigDecimal</h1>
+
+<p>BigDecimal可以表示一个任意大小且精度完全准确的浮点数。</p>
+
+<pre class="has" name="code"><code class="language-java hljs"><ol class="hljs-ln"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 待完善</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> BigInteger intVal;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="3"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 表示小数位数</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="4"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> scale;  </div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="5"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 小数的位数，如果小数位数未知则为0，如果非0，保证值时正确的</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="6"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">transient</span> <span class="hljs-keyword">int</span> precision;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="7"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"> </div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="8"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 用于存储规范的字符串表示形式</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="9"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">transient</span> String stringCache;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="10"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"> </div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="11"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// intCompact的值，表示有意义的部分只能从intVal中获得</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="12"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">long</span> INFLATED = Long.MIN_VALUE;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="13"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"> </div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="14"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> BigInteger INFLATED_BIGINT = BigInteger.valueOf(INFLATED);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="15"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"> </div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="16"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 如果此bigdecimal的有效位的绝对值小于或等于@code long.max，则该值可以紧凑地存储在此字段中并用于计算。</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="17"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">transient</span> <span class="hljs-keyword">long</span> intCompact;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="18"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"> </div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="19"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 所有18位十进制字符串都适合一个long；并非所有19位字符串都适合</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="20"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MAX_COMPACT_DIGITS = <span class="hljs-number">18</span>;</div></div></li></ol></code><div class="hljs-button {2}" data-title="复制" onclick="hljs.copyCode(event)"></div></pre>
+
+<p>构造器</p>
+
+<pre class="has" name="code"><code class="language-java hljs"><ol class="hljs-ln"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"> BigDecimal(<span class="hljs-keyword">int</span>)           </div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"> BigDecimal(<span class="hljs-keyword">double</span>)       </div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="3"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"> BigDecimal(<span class="hljs-keyword">long</span>)         </div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="4"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"> BigDecimal(String)    </div></div></li></ol></code><div class="hljs-button {2}" data-title="复制" onclick="hljs.copyCode(event)"></div></pre>
+
+<p>示例</p>
+
+<pre class="has" name="code"><code class="language-java hljs"><ol class="hljs-ln"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal n = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-number">1</span>);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal n1 = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-number">2l</span>);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="3"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal n2 = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-number">2.01</span>);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="4"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal n3 = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-string">"2.011"</span>);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="5"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal n4 = BigDecimal.valueOf(<span class="hljs-number">2.02132</span>);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="6"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">System.out.println(n); <span class="hljs-comment">// 1</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="7"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">System.out.println(n1); <span class="hljs-comment">// 2</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="8"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">System.out.println(n2); <span class="hljs-comment">// 2.0099999999999997868371792719699442386627197265625</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="9"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">System.out.println(n3); <span class="hljs-comment">// 2.011</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="10"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">System.out.println(n4); <span class="hljs-comment">// 2.02132</span></div></div></li></ol></code><div class="hljs-button {2}" data-title="复制" onclick="hljs.copyCode(event)"></div></pre>
+
+<p>如果想要获取精确的值，最好使用BigDecimal(String)，BigDecimal.valueOf中是现将double转string，然后调用BigDecimal(String)，即BigDecimal(Double.toString(val))。</p>
+
+<p>BigDecimal加减乘除也是调用对应的实例方法</p>
+
+<pre class="has" name="code"><code class="language-java hljs"><ol class="hljs-ln"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal n5 = n.add(n1);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal n6 = n.subtract(n2);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="3"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal n7 = n.multiply(n1);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="4"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal n8 = n.divide(n1);</div></div></li></ol></code><div class="hljs-button {2}" data-title="复制" onclick="hljs.copyCode(event)"></div></pre>
+
+<p>scale()和precision()</p>
+
+<pre class="has" name="code"><code class="language-java hljs"><ol class="hljs-ln"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d1=<span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-string">"1232400"</span>);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d2=<span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-string">"123.1300"</span>);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="3"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d3=<span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-string">"12.11"</span>);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="4"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">System.out.println(d1.scale()); <span class="hljs-comment">// 0</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="5"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">System.out.println(d2.scale()); <span class="hljs-comment">// 4</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="6"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">System.out.println(d3.scale()); <span class="hljs-comment">// 2</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="7"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">System.out.println(d1.precision()); <span class="hljs-comment">// 7</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="8"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">System.out.println(d2.precision()); <span class="hljs-comment">// 7</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="9"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">System.out.println(d3.precision()); <span class="hljs-comment">// 4</span></div></div></li></ol></code><div class="hljs-button {2}" data-title="复制" onclick="hljs.copyCode(event)"></div></pre>
+
+<p>之前感觉看代码的时候并没有理解scale和precision的区别，按照这个输出结果，scale输出的是小数位数，precision输出到底是什么，还有点蒙圈。</p>
+
+<pre class="has" name="code"><code class="language-java hljs"><ol class="hljs-ln"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d1 = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-string">"123.4500"</span>);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d2 = d1.stripTrailingZeros();</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="3"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">System.out.println(d1.scale()); <span class="hljs-comment">// scale 4 precision 7 stringCache 123.4500 intCompact 1234500</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="4"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">System.out.println(d2.scale()); <span class="hljs-comment">// scale 2 precision 0 stringCache 123.45 intCompact 12345</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="5"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"> </div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="6"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d3 = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-string">"1234500"</span>);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="7"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d4 = d3.stripTrailingZeros();</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="8"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">System.out.println(d3.scale()); <span class="hljs-comment">// scale 0 precision 7 stringCache 1234500 intCompact 1234500</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="9"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">System.out.println(d4.scale()); <span class="hljs-comment">// scale -2 precison 0 stringCache 1.2345E+6 intCompact 12345</span></div></div></li></ol></code><div class="hljs-button {2}" data-title="复制" onclick="hljs.copyCode(event)"></div></pre>
+
+<p>stripTrailingZeros将BigDecimal格式化为去掉末尾的0但是大小相等的BigDecimal。</p>
+
+<pre class="has" name="code"><code class="language-java hljs"><ol class="hljs-ln"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d1 = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-string">"0.32132"</span>);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d2 = d1.setScale(<span class="hljs-number">2</span>, BigDecimal.ROUND_DOWN); <span class="hljs-comment">// 0.32</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="3"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d3 = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-string">"-0.32132"</span>);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="4"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d4 = d3.setScale(<span class="hljs-number">2</span>, BigDecimal.ROUND_DOWN); <span class="hljs-comment">// -0.32</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="5"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d5 = d1.setScale(<span class="hljs-number">2</span>, BigDecimal.ROUND_CEILING); <span class="hljs-comment">//0.33</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="6"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d6 = d3.setScale(<span class="hljs-number">2</span>, BigDecimal.ROUND_CEILING); <span class="hljs-comment">// -0.32</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="7"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d7 = d1.setScale(<span class="hljs-number">2</span>, BigDecimal.ROUND_FLOOR); <span class="hljs-comment">//0.32</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="8"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d8 = d3.setScale(<span class="hljs-number">2</span>, BigDecimal.ROUND_FLOOR); <span class="hljs-comment">// -0.33</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="9"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d11=<span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-string">"0.366"</span>);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="10"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d12=<span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-string">"-0.366"</span>);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="11"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d13=<span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-string">"0.322"</span>);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="12"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d14=<span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-string">"-0.322"</span>);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="13"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d15=d11.setScale(<span class="hljs-number">2</span>,BigDecimal.ROUND_HALF_DOWN); <span class="hljs-comment">// 0.37</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="14"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d16=d12.setScale(<span class="hljs-number">2</span>,BigDecimal.ROUND_HALF_DOWN); <span class="hljs-comment">// -0.37</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="15"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d17=d13.setScale(<span class="hljs-number">2</span>,BigDecimal.ROUND_HALF_DOWN); <span class="hljs-comment">// 0.32</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="16"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d18=d14.setScale(<span class="hljs-number">2</span>,BigDecimal.ROUND_HALF_DOWN); <span class="hljs-comment">// -0.32</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="17"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d19=d11.setScale(<span class="hljs-number">2</span>,BigDecimal.ROUND_HALF_EVEN); <span class="hljs-comment">// 0.37</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="18"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d20=d12.setScale(<span class="hljs-number">2</span>,BigDecimal.ROUND_HALF_EVEN); <span class="hljs-comment">// -0.37</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="19"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d21=d13.setScale(<span class="hljs-number">2</span>,BigDecimal.ROUND_HALF_EVEN); <span class="hljs-comment">// 0.32</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="20"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d22=d14.setScale(<span class="hljs-number">2</span>,BigDecimal.ROUND_HALF_EVEN); <span class="hljs-comment">// -0.32</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="21"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d23=d11.setScale(<span class="hljs-number">2</span>,BigDecimal.ROUND_HALF_UP); <span class="hljs-comment">// 0.37</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="22"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d24=d12.setScale(<span class="hljs-number">2</span>,BigDecimal.ROUND_HALF_UP); <span class="hljs-comment">// -0.37</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="23"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d25=d13.setScale(<span class="hljs-number">2</span>,BigDecimal.ROUND_HALF_UP); <span class="hljs-comment">// 0.32</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="24"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d26=d14.setScale(<span class="hljs-number">2</span>,BigDecimal.ROUND_HALF_UP); <span class="hljs-comment">// -0.32</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="25"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d27=d11.setScale(<span class="hljs-number">2</span>,BigDecimal.ROUND_UP); <span class="hljs-comment">// 0.37</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="26"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d28=d12.setScale(<span class="hljs-number">2</span>,BigDecimal.ROUND_UP); <span class="hljs-comment">// -0.37</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="27"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d29=d13.setScale(<span class="hljs-number">2</span>,BigDecimal.ROUND_UP); <span class="hljs-comment">// 0.33</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="28"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d30=d14.setScale(<span class="hljs-number">2</span>,BigDecimal.ROUND_UP); <span class="hljs-comment">// -0.33</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="29"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d31=<span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-string">"0.325"</span>);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="30"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d32=<span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-string">"-0.325"</span>);</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="31"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d33=d31.setScale(<span class="hljs-number">2</span>,BigDecimal.ROUND_HALF_EVEN); <span class="hljs-comment">// 0.32</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="32"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line">BigDecimal d34=d32.setScale(<span class="hljs-number">2</span>,BigDecimal.ROUND_HALF_EVEN); <span class="hljs-comment">// -0.32</span></div></div></li></ol></code><div class="hljs-button {2}" data-title="复制" onclick="hljs.copyCode(event)"></div></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+                                    </div>
+                                                <div class="more-toolbox">
+                <div class="left-toolbox">
+                    <ul class="toolbox-list">
+
+<pre><code>            &lt;li class=&quot;tool-item tool-active is-like &quot;&gt;&lt;a href=&quot;javascript:;&quot;&gt;&lt;svg class=&quot;icon&quot; aria-hidden=&quot;true&quot;&gt;
+                &lt;use xlink:href=&quot;#csdnc-thumbsup&quot;&gt;&lt;/use&gt;
+            &lt;/svg&gt;&lt;span class=&quot;name&quot;&gt;点赞&lt;/span&gt;
+            &lt;span class=&quot;count&quot;&gt;&lt;/span&gt;
+            &lt;/a&gt;&lt;/li&gt;
+            &lt;li class=&quot;tool-item tool-active is-collection &quot;&gt;&lt;a href=&quot;javascript:;&quot; data-report-click=&quot;{&amp;quot;mod&amp;quot;:&amp;quot;popu_824&amp;quot;}&quot;&gt;&lt;svg class=&quot;icon&quot; aria-hidden=&quot;true&quot;&gt;
+                &lt;use xlink:href=&quot;#icon-csdnc-Collection-G&quot;&gt;&lt;/use&gt;
+            &lt;/svg&gt;&lt;span class=&quot;name&quot;&gt;收藏&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li class=&quot;tool-item tool-active is-share&quot;&gt;&lt;a href=&quot;javascript:;&quot; data-report-click=&quot;{&amp;quot;mod&amp;quot;:&amp;quot;1582594662_002&amp;quot;}&quot;&gt;&lt;svg class=&quot;icon&quot; aria-hidden=&quot;true&quot;&gt;
+                &lt;use xlink:href=&quot;#icon-csdnc-fenxiang&quot;&gt;&lt;/use&gt;
+            &lt;/svg&gt;分享&lt;/a&gt;&lt;/li&gt;
+            &lt;!--打赏开始--&gt;
+                                    &lt;!--打赏结束--&gt;
+                                    &lt;li class=&quot;tool-item tool-more&quot;&gt;
+                &lt;a&gt;
+                &lt;svg t=&quot;1575545411852&quot; class=&quot;icon&quot; viewBox=&quot;0 0 1024 1024&quot; version=&quot;1.1&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; p-id=&quot;5717&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot; width=&quot;200&quot; height=&quot;200&quot;&gt;&lt;defs&gt;&lt;style type=&quot;text/css&quot;&gt;&lt;/style&gt;&lt;/defs&gt;&lt;path d=&quot;M179.176 499.222m-113.245 0a113.245 113.245 0 1 0 226.49 0 113.245 113.245 0 1 0-226.49 0Z&quot; p-id=&quot;5718&quot;&gt;&lt;/path&gt;&lt;path d=&quot;M509.684 499.222m-113.245 0a113.245 113.245 0 1 0 226.49 0 113.245 113.245 0 1 0-226.49 0Z&quot; p-id=&quot;5719&quot;&gt;&lt;/path&gt;&lt;path d=&quot;M846.175 499.222m-113.245 0a113.245 113.245 0 1 0 226.49 0 113.245 113.245 0 1 0-226.49 0Z&quot; p-id=&quot;5720&quot;&gt;&lt;/path&gt;&lt;/svg&gt;
+                &lt;/a&gt;
+                &lt;ul class=&quot;more-box&quot;&gt;
+                    &lt;li class=&quot;item&quot;&gt;&lt;a class=&quot;article-report&quot;&gt;文章举报&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/li&gt;
+                                &lt;/ul&gt;
+    &lt;/div&gt;
+                &lt;/div&gt;
+&lt;div class=&quot;person-messagebox&quot;&gt;
+    &lt;div class=&quot;left-message&quot;&gt;&lt;a href=&quot;https://blog.csdn.net/sxllllwd&quot;&gt;
+        &lt;img src=&quot;https://profile.csdnimg.cn/A/9/5/3_sxllllwd&quot; class=&quot;avatar_pic&quot; username=&quot;sxllllwd&quot;&gt;
+                                &lt;img src=&quot;https://g.csdnimg.cn/static/user-reg-year/2x/7.png&quot; class=&quot;user-years&quot;&gt;
+                        &lt;/a&gt;&lt;/div&gt;
+    &lt;div class=&quot;middle-message&quot;&gt;
+                            &lt;div class=&quot;title&quot;&gt;&lt;span class=&quot;tit&quot;&gt;&lt;a href=&quot;https://blog.csdn.net/sxllllwd&quot; data-report-click=&quot;{&amp;quot;mod&amp;quot;:&amp;quot;popu_379&amp;quot;}&quot; target=&quot;_blank&quot;&gt;沙漏dan&lt;/a&gt;&lt;/span&gt;
+                                &lt;/div&gt;
+        &lt;div class=&quot;text&quot;&gt;&lt;span&gt;发布了162 篇原创文章&lt;/span&gt; · &lt;span&gt;获赞 22&lt;/span&gt; · &lt;span&gt;访问量 10万+&lt;/span&gt;&lt;/div&gt;
+    &lt;/div&gt;
+                    &lt;div class=&quot;right-message&quot;&gt;
+                                &lt;a href=&quot;https://im.csdn.net/im/main.html?userName=sxllllwd&quot; target=&quot;_blank&quot; class=&quot;btn btn-sm btn-red-hollow bt-button personal-letter&quot;&gt;私信
+            &lt;/a&gt;
+                                                &lt;a class=&quot;btn btn-sm  bt-button personal-watch&quot; data-report-click=&quot;{&amp;quot;mod&amp;quot;:&amp;quot;popu_379&amp;quot;}&quot;&gt;关注&lt;/a&gt;
+                        &lt;/div&gt;
+                &lt;/div&gt;
+        &lt;/div&gt;</code></pre>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/zhifubao.JPG">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixin.JPG">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://1648121487.github.io/2020/03/22/Java%20%E5%A4%A7%E6%95%B0%E5%80%BC%20BigInteger%E5%92%8CBigDecimal%E8%AF%A6%E8%A7%A3/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/21/Java%E4%B8%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%80%BB%E7%BB%93/" class="archive-article-date">
-  	<time datetime="2020-03-21T08:38:15.729Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-21</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/03/21/Java%E4%B8%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java中字符串的总结</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/21/Java%E4%B8%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%80%BB%E7%BB%93/">Java中字符串的总结</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/04/Hexo+Github%20Pages+yilia%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2020-03-04T05:34:14.007Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/04/Hexo+Github%20Pages+yilia%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">Hexo+Github Pages+yilia搭建博客</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/04/%E5%85%B3%E4%BA%8EJava%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8API/" class="archive-article-date">
-  	<time datetime="2020-03-04T05:02:50.917Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/04/%E5%85%B3%E4%BA%8EJava%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8API/">关于Java数据结构的一些常用API</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -304,8 +467,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

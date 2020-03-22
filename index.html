@@ -160,58 +160,47 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Java 大数值 BigInteger和BigDecimal详解 " class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Java 大数值 BigInteger和BigDecimal详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/22/Java%20%E5%A4%A7%E6%95%B0%E5%80%BC%20BigInteger%E5%92%8CBigDecimal%E8%AF%A6%E8%A7%A3%20/">Java 大数值 BigInteger和BigDecimal详解 </a>
+      <a class="article-title" href="/2020/03/22/Java%20%E5%A4%A7%E6%95%B0%E5%80%BC%20BigInteger%E5%92%8CBigDecimal%E8%AF%A6%E8%A7%A3/">Java 大数值 BigInteger和BigDecimal详解</a>
     </h1>
   
 
         
-        <a href="/2020/03/22/Java%20%E5%A4%A7%E6%95%B0%E5%80%BC%20BigInteger%E5%92%8CBigDecimal%E8%AF%A6%E8%A7%A3%20/" class="archive-article-date">
-  	<time datetime="2020-03-22T08:39:53.559Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-22</time>
+        <a href="/2020/03/22/Java%20%E5%A4%A7%E6%95%B0%E5%80%BC%20BigInteger%E5%92%8CBigDecimal%E8%AF%A6%E8%A7%A3/" class="archive-article-date">
+  	<time datetime="2020-03-22T08:59:07.621Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-22</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <div id="article_content" class="article_content clearfix" style="height: 2262px; overflow: hidden;">
+        <div id="article_content" class="article_content clearfix">
             <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/ck_htmledit_views-833878f763.css">
                             <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/ck_htmledit_views-833878f763.css">
                 <div class="htmledit_views" id="content_views">
+                                            <p>&nbsp;</p>
 
-<h1><a name="t0"></a><a name="t0"></a><span style="font-size:24px;">本文目标</span></h1>
-<p><span style="font-size:14px;">可以使用<strong><span style="color:#3333ff;">BigInteger</span></strong>操作大整数<br>
-可以使用<strong><span style="color:#3333ff;">BigDecimal</span></strong>指定小数的保留位数</span></p>
-<h1><a name="t1"></a><a name="t1"></a><span style="font-size:24px;">基础知识</span></h1>
-<p><span style="font-size:14px;">对于二进制来说，最高位代表正负号，-0表示-128，+0表示0<br><strong><span style="color:#ff0000;">32位系统</span></strong>int型4个字节：<strong><span style="color:#ff0000;">-(2的31次方) ~ (2的31次方) 减 1</span></strong><br>
-最大负数：10000000 00000000 00000000 00000000<br>
-最大正数：01111111 11111111 11111111 11111111<br>
-0: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 00000000 00000000 00000000 00000000</span></p>
-<p><span style="font-size:14px;"><strong><span style="color:#ff0000;">64位系统</span></strong>同理，int型表示范围是：<strong><span style="color:#ff0000;">-(2的63次方) ~ (2的63次方) 减 1</span></strong></span></p>
-<p><span style="font-size:14px;"><strong><span style="color:#ff0000;"><br></span></strong></span></p>
-<h1><a name="t2"></a><a name="t2"></a><span style="font-size:24px;">具体内容</span></h1>
-<p><br></p>
-<h2><a name="t3"></a><a name="t3"></a>大数操作</h2>
-<p><span style="font-size:14px;">正常情况下一个整数最多只能放在long类型之中，但是如果现在有如下的一个数字：<br>
-&nbsp; &nbsp; &nbsp; &nbsp; 1111111111111111111111111111111111111111111111111<br>
-根本就是无法保存的，所以为了解决这样的问题，在java中引入了两个大数的操作类：<br>
-&nbsp; &nbsp; &nbsp; &nbsp; 操作整型：BigInteger<br>
-&nbsp; &nbsp; &nbsp; &nbsp; 操作小数：BigDecimal<br>
-当然了，这些大数都会以<strong><span style="color:#3333ff;">字符串</span></strong>的形式传入。</span></p>
-<h2><a name="t4"></a><a name="t4"></a><span style="font-size:18px;">BigInteger</span></h2>
-<p><span style="font-size:14px;"><span><span style="font-size:14px;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></span>如果在操作的时候一个整型数据已经超过了整数的最大类型长度long的话，则此数据就无法装入，所以，此时要使用BigInteger类进行操作。</span></p>
-<p style="text-align:center;"><span style="font-size:14px;"><img src="https://img-blog.csdn.net/20160823162406249" alt=""><br></span></p>
-<p><span style="font-size:14px;"><span style="font-size:14px;">&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span>BigInteger是在java.math包中。</span></p>
-<p><span style="font-size:14px;">代码示例：</span></p>
-<p><span style="font-size:14px;"></span></p>
+<p>最近的项目中用到了BigDecimal，之前并没有深入学习使用过，只是大概知道可以用于精确的运算，而float和double是不精确的。</p>
+
+<p>BigDecimal的实现中用到了BigIntegr，因此这里先学习下BigInteger。</p>
+
+<h1><a name="t0"></a><a name="t0"></a>BigInteger</h1>
+
+<p>int和long都有长度限制，如果需要计算的整数大小超过long的范围，那么可以用到BigInteger。</p>
+
+<p>BigInteger继承自抽象类Number。</p>
+
+<pre class="has" name="code"><code class="language-java hljs"><ol class="hljs-ln" style="width:1068px"><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 符号，-1-负数，0-0，1-正数</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> signum;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="3"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">//以大尾数顺序表示的这个大整数的大小：这个数组的第0个元素是该大小中最重要的整数。</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="4"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">//大小必须“最小”，因为最重要的int（@code mag[0]）必须为非零。</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="5"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">//这对于确保每个biginteger值只有一个表示是必要的。注意，这意味着biginteger zero有一个零长度的mag数组。</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="6"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// mag表示的是正数的原码字节数组。mag数组是存储BigInteger数值大小的，采用big-endian的顺序，也就是高位字节存入低地址，低位字节存入高地址.</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="7"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// http://www.mamicode.com/info-detail-1360414.html</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="8"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span>[] mag;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="9"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 冗余字段</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="10"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> bitCount;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="11"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 冗余字段</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="12"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> bitLength;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="13"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 冗余字段</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="14"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> lowestSetBit;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="15"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 冗余字段</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="16"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> firstNonzeroIntNum;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="17"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 用于获取int值</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="18"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">final</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">long</span> LONG_MASK = <span class="hljs-number">0xffffffffL</span>;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="19"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 数组最大长度</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="20"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MAX_MAG_LENGTH = Integer.MAX_VALUE / Integer.SIZE + <span class="hljs-number">1</span>; <span class="hljs-comment">// (1 &lt;&lt; 26)</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="21"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// PRIME_SEARCH_BIT_LENGTH_LIMIT 大于这个长度的大数会导致BitSieve.singleSearch方法溢出</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="22"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span>  <span class="hljs-keyword">int</span> PRIME_SEARCH_BIT_LENGTH_LIMIT = <span class="hljs-number">500000000</span>;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="23"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 两个大数的mag[] 长度都大于这个值，将会使用Karatsuba multiplication</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="24"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> KARATSUBA_THRESHOLD = <span class="hljs-number">80</span>;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="25"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 如果两个数mag长度都大于KARATSUBA_THRESHOLD，且至少一个的长度大于这个限度，将会使用3-way Toom-Cook multiplication</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="26"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> TOOM_COOK_THRESHOLD = <span class="hljs-number">240</span>;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="27"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 如果大数的数组长度大于该限制，将会使用Karatsuba squaring</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="28"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> KARATSUBA_SQUARE_THRESHOLD = <span class="hljs-number">128</span>;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="29"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 如果大数的数组长度大于该限制，将会使用Toom-Cook squaring</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="30"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> TOOM_COOK_SQUARE_THRESHOLD = <span class="hljs-number">216</span>;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="31"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">// 下面几个参数作用类似，暂时不记录，等到以后需要时再细看</span></div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="32"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> BURNIKEL_ZIEGLER_THRESHOLD = <span class="hljs-number">80</span>;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="33"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> BURNIKEL_ZIEGLER_OFFSET = <span class="hljs-number">40</span>;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="34"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> SCHOENHAGE_BASE_CONVERSION_THRESHOLD = <span class="hljs-number">20</span>;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="35"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MULTIPLY_SQUARE_THRESHOLD = <span class="hljs-number">20</span>;</div></div></li><li><div class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="36"></div></div><div class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MONTGOMERY_INTRINSIC_THRESHOLD = <span class="hljs-number">512</span>;</div></div></li></ol></code><div class="hljs-button {2}" data-title="复制" onclick="hljs.copyCode(event)"></div></pre>
+
+<p>构造函数</p>
         
-          <a class="article-more-a" href="/2020/03/22/Java%20%E5%A4%A7%E6%95%B0%E5%80%BC%20BigInteger%E5%92%8CBigDecimal%E8%AF%A6%E8%A7%A3%20/#more">more >></a>
+          <a class="article-more-a" href="/2020/03/22/Java%20%E5%A4%A7%E6%95%B0%E5%80%BC%20BigInteger%E5%92%8CBigDecimal%E8%AF%A6%E8%A7%A3/#more">more >></a>
         
       
 
@@ -224,7 +213,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/03/22/Java%20%E5%A4%A7%E6%95%B0%E5%80%BC%20BigInteger%E5%92%8CBigDecimal%E8%AF%A6%E8%A7%A3%20/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/03/22/Java%20%E5%A4%A7%E6%95%B0%E5%80%BC%20BigInteger%E5%92%8CBigDecimal%E8%AF%A6%E8%A7%A3/">展开全文 >></a>
         </p>
       
 
