@@ -21,7 +21,7 @@
 <meta property="og:image" content="https://img2018.cnblogs.com/i-beta/1691302/201912/1691302-20191216110438906-1959381743.png">
 <meta property="og:image" content="https://img2018.cnblogs.com/i-beta/1691302/201912/1691302-20191216110505582-2062138785.png">
 <meta property="article:published_time" content="2020-03-21T08:38:15.729Z">
-<meta property="article:modified_time" content="2020-03-21T08:43:13.137Z">
+<meta property="article:modified_time" content="2020-03-22T08:32:28.322Z">
 <meta property="article:author" content="Cohen Cao">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://img2018.cnblogs.com/i-beta/1691302/201912/1691302-20191216112146655-1488793712.png">
@@ -199,6 +199,8 @@
 <div class="cnblogs_Highlighter sh-gutter">
 <div><div id="highlighter_369345" class="syntaxhighlighter  javascript"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="javascript plain">String s1 = </code><code class="javascript string">"abc"</code><code class="javascript plain">;</code></div><div class="line number2 index1 alt1"><code class="javascript plain">s1 += </code><code class="javascript string">"def"</code><code class="javascript plain">;</code></div><div class="line number3 index2 alt2"><code class="javascript plain">System.out.println(s1);&nbsp; </code><code class="javascript comments">// s1 = "abcdef"</code></div></div></td></tr></tbody></table></div></div>
 </div>
+<a id="more"></a>
+
 <p>　　　　　<span style="font-family: 隶书;">　</span><span style="font-size: 18px;"><span style="font-family: 楷体;"><strong>分析</strong>：</span><span class="fontstyle0"><span style="font-family: 楷体;">内存中有</span><span class="fontstyle1"><span style="font-family: 楷体;">"abc"</span><span class="fontstyle0"><span style="font-family: 楷体;">，</span><span class="fontstyle1"><span style="font-family: 楷体;">"abcdef"</span><span class="fontstyle0"><span style="font-family: 楷体;">两个对象，</span><span class="fontstyle1"><span style="font-family: 楷体;">s1</span><span class="fontstyle0"><span style="font-family: 楷体;">从指向&nbsp;</span><span class="fontstyle1"><span style="font-family: 楷体;">"abc"</span><span class="fontstyle0"><span style="font-family: 楷体;">，改变指向，指向了</span><span class="fontstyle1"><span style="font-family: 楷体;">"abcdef" ，字符串本身并没有改变，而是改变了指向。</span></span></span></span></span></span></span></span></span></span></span></span></p>
 <p><span style="font-size: 18px;"><span class="fontstyle0"><span class="fontstyle1"><span class="fontstyle0"><span class="fontstyle1"><span class="fontstyle0"><span class="fontstyle1"><span class="fontstyle0"><span class="fontstyle1"><span class="fontstyle0"><span class="fontstyle1"><span style="font-family: 楷体;">　　　　<strong><span style="color: #3366ff;"> 扩展</span>：String对象怎么就不可变？</strong><br></span></span></span></span></span></span></span></span></span></span></span></span></p>
 <blockquote>
@@ -211,7 +213,6 @@
 
 
 
-<a id="more"></a>
 
 
 
